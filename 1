@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perbarindo DPD Jawa Tengah</title>
+
+    <!-- gaya minimal -->
+    <style>
+        /* font ringan: pakai font bawaan OS */
+        body{
+            margin:0;
+            font-family:system-ui, sans-serif;
+            background:#fff;
+            /* center-kan seluruh konten */
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+        h2{ margin-bottom:1rem; }
+
+        /* overlay peringatan */
+        #browser-warning-overlay{
+            position:fixed;
+            inset:0;            /* top:0; left:0; right:0; bottom:0; */
+            background:rgba(0,0,0,.8);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            z-index:9999;
+        }
+        #browser-warning-box{
+            background:#f0f0f0;
+            color:#333;
+            padding:30px;
+            border-radius:8px;
+            text-align:center;
+            max-width:420px;
+            box-shadow:0 4px 15px rgba(0,0,0,.5);
+        }
+        #browser-warning-box h2{
+            margin-top:0;
+            color:#d9534f;
+        }
+        #browser-warning-box a{
+            display:inline-block;
+            margin:8px 5px;
+            padding:10px 20px;
+            background:#0275d8;
+            color:#fff;
+            text-decoration:none;
+            border-radius:5px;
+        }
+        #browser-warning-box a:hover{ background:#025aa5; }
+    </style>
+</head>
+
+<body>
+    <h2>Selamat Datang di Website Perbarindo DPD Jawa Tengah</h2>
+
+    <!-- kotak peringatan -->
+    <div id="browser-warning-overlay">
+        <div id="browser-warning-box">
+            <h2>Browser Anda Perlu Diperbarui</h2>
+            <p>Maaf, website ini membutuhkan fitur modern yang tidak didukung browser Anda saat ini.</p>
+            <p>Silakan perbarui browser Anda untuk melihat website ini dengan benar.</p>
+            <a href="https://www.google.com/chrome/" target="_blank">Download Chrome</a>
+            <a href="https://www.mozilla.org/firefox/" target="_blank">Download Firefox</a>
+            <a href="https://www.microsoft.com/edge" target="_blank">Download Edge</a>
+        </div>
+    </div>
+
+    <script>
+        // cek fitur minimal
+        function browserIsModern(){
+            return !!(window.Promise && window.fetch &&
+                      document.body.classList &&
+                      'content' in document.createElement('template'));
+        }
+        const overlay = document.getElementById('browser-warning-overlay');
+        if(browserIsModern()){
+            overlay.style.display = 'none';
+        }else{
+            overlay.style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
